@@ -18,6 +18,5 @@ Register.
 Login.
 Logout.
 
-🗑️ Fitur Tambahan
-
+Fitur Tambahan
 Hapus foto (jika kamu adalah pemilik foto).
