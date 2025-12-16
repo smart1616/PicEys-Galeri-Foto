@@ -1,0 +1,22 @@
+:root{
+  --sky:#7ec8e3;
+  --pink:#ff7bb2;
+  --white:#fff;
+}
+
+body{
+  background: linear-gradient(180deg,#fff,#f7fbff);
+}
+
+#main-nav{
+  background: linear-gradient(90deg,var(--sky),var(--pink));
+}
+
+.nav-link,.navbar-brand{
+  color:white!important;
+}
+
+.card{
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
