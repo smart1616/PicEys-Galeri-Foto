@@ -1,0 +1,45 @@
+CREATE DATABASE IF NOT EXISTS galeri_db
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE galeri_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin','user') DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE fotos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    judul VARCHAR(150) NOT NULL,
+    file VARCHAR(255) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_fotos_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    foto_id INT NOT NULL,
+    user_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unik_like (foto_id, user_id),
+    CONSTRAINT fk_likes_foto
+        FOREIGN KEY (foto_id) REFERENCES fotos(id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_likes_user
+        FOREIGN KEY (user_id) REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
+INSERT INTO users (username, password, role)
+VALUES (
+    'admin',
+    '$2y$10$XcHf6F9f3J9mR5E0F5PZcO9KzHhE4n5D4n4J6C9QYx2RZcVqkZpKm',
+    'admin'
+);
